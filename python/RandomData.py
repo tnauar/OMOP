@@ -3,10 +3,16 @@ class RandomData():
 
     """This class contains the data from which the random data is generated."""
 
-    FIRST_NAMES = [
-        "Matti", "Pekka", "Kaisa", "Anna", "Sari", "Juha", "Mikko", "Laura",
-        "Tiina", "Jari", "Emilia", "Petri", "Hanna", "Aleksi", "Noora", "Markku",
-        "Ali", "Mohammed", "Sumit", "Aisha", "Fatima", "Jonne", "Vianna"
+    FIRST_NAMES_MALE = [
+        "Matti", "Pekka", "Kai", "Antti", "Seppo", "Juha", "Mikko", "Lari",
+        "Timo", "Jari", "Emil", "Petri", "Hannu", "Aleksi", "Teppo", "Markku",
+        "Ali", "Mohammed", "Sumit", "Veikko"
+    ]
+
+    FIRST_NAMES_FEMALE = [
+        "Maija", "Pirkko", "Kaisa", "Anna", "Sari", "Jaana", "Mervi", "Laura",
+        "Tiina", "Joanna", "Emilia", "Pirjo", "Hanna", "Aleksandra", "Noora", "Maarit",
+        "Aisha", "Fatima", "Johanna", "Vianna"
     ]
 
     LAST_NAMES = [
