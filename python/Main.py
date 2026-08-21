@@ -1,37 +1,25 @@
 import random
 import csv
+from datetime import date, timedelta
 from RandomData import RandomData
 
 class Main:
 
     def main(self):
-        print(RandomData.FIRST_NAMES)
-        print(self.choose_symptoms())
-        print(self.choose_medications())
-        print(self.choose_conditions())
-        print(self.choose_durations())
-        print(self.choose_templates())
 
-        (sym1, sym1_inflection), (sym2, sym2_inflection) = self.choose_symptoms()
-        med1 = self.choose_medications()
-        (cond1, cond1_inflection) = self.choose_conditions()
-        dur1 = self.choose_durations()
         self.write_file()
 
-        template = self.choose_templates()
-        print(template.format(sym1=sym1_inflection, sym2=sym2_inflection, med1=med1, duration=dur1, condition=cond1))
-
     def choose_symptoms(self):
-        (sym1, sym1_inflection), (sym2, sym2_inflection)= random.sample(RandomData.SYMPTOM_BANK, 2)
-        return (sym1, sym1_inflection), (sym2, sym2_inflection)
+        (sym1, sym2)= random.sample(RandomData.SYMPTOM_BANK, 2)
+        return (sym1, sym2)
 
     def choose_medications(self):
         med1 = random.choice(RandomData.MEDICATIONS)
         return med1
 
     def choose_conditions(self):
-        (cond1, cond1_inflection) = random.choice(RandomData.CONDITIONS)
-        return (cond1, cond1_inflection)
+        cond1 = random.choice(RandomData.CONDITIONS)
+        return cond1
 
     def choose_durations(self):
         dur1 = random.choice(RandomData.DURATIONS)
@@ -40,94 +28,115 @@ class Main:
     def choose_templates(self):
         temp1 = random.choice(RandomData.TEMPLATES)
         return temp1
-        
+
+    def choose_name(self, gender):
+
+        if gender[0] == "T":
+            gender = random.choice(["M", "N"]) 
+
+        if gender[0] == "M":
+            firstname = random.choice(RandomData.FIRST_NAMES_MALE)
+            lastname = random.choice(RandomData.LAST_NAMES)
+            return firstname, lastname
+        else:
+            firstname = random.choice(RandomData.FIRST_NAMES_FEMALE)
+            lastname = random.choice(RandomData.LAST_NAMES)
+            return firstname, lastname
+
+    def choose_vacc_keyword(self):
+        return random.choice(RandomData.VACCINATION_KEYWORD)
+
+    def choose_vacc_place(self):
+        return random.choice(RandomData.VACCINATION_PLACE)
+
+    def choose_vacc_type(self):
+        return random.choice(RandomData.VACCINATION_TYPE)
+
+    def free_text_gen(self, sym_1, sym_2, medication, condition, duration, vacc_keyword, vacc_place, vacc_type, type):
+
+        if type[0] == "normal":
+            template = random.choice(RandomData.TEMPLATES)
+            return template.format(
+            sym1=sym_1,
+            sym2=sym_2,
+            med1=medication,
+            duration=duration,
+            condition=condition
+        )
+        else:
+            template = random.choice(RandomData.TEMPLATES_VACC)
+            return template.format(
+            vacc_keyword=vacc_keyword,
+            vacc_place=vacc_place,
+            vacc_type=vacc_type
+        )
+
+
     def write_file(self):
 
         try:
             with open("omop_visit_exercise_fi.csv", "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
                 writer.writerow([
+                    "rivi",
                     "käynti_id",
                     "henkilö_id",
-                    "potilaan_nimi",
-                    "käyntipäivä",
-                    "ikä",
                     "sukupuoli",
+                    "potilaan_nimi",
+                    "ikä",
+                    "käyntipäivä",
                     "käynnin_tyyppi",
-                    "vapaa_teksti",
                     "oire_1",
                     "oire_2",
-                    "lääke_1",
-                    "lääke_2",
-                    "potilaan_tila"
+                    "lääke",
+                    "potilaan_tila",
+                    "oireiden kesto",
+                    "vapaa_teksti"
                 ])
-        except PermissionError:
-            pass
 
-    for i in range(1, 501):
-        person_id = 10000 + random.randint(1, 5000)
-        
-        first = random.choice(FIRST_NAMES)
-        last = random.choice(LAST_NAMES)
-        patient_name = f"{first} {last}"
 
-        visit_date = START_DATE + timedelta(days=random.randint(0, 365))
-        age = random.randint(1, 95)
-        sex = random.choice(["F", "M", "U"])
+                visit_id = 20000 + random.randint(4000, 9000)
+                START_DATE = date(2025, 1, 1)
 
-        visit_type, visit_concept_id = random.choice(VISIT_TYPES)
-        chief_complaint, chief_complaint_fi = random.choice([
-            ("Headache", "päänsärky"),
-            ("Fever", "kuume"),
-            ("Cough", "yskä"),
-            ("Abdominal pain", "vatsakipu"),
-            ("Dizziness", "huimaus"),
-            ("Back pain", "selkäkipu"),
-            ("Nausea", "pahoinvointi"),
-            ("Shortness of breath", "hengenahdistus"),
-        ])
+                for i in range(1, 10):
 
-        s1, s1_form, s2, s2_form, s3, s3_form = choose_symptoms()
-        med1 = random.choice(MEDICATIONS)
-        med2 = random.choice(MEDICATIONS + [""])
+                    visit_id = visit_id + i
+                    person_id = 10000 + random.randint(1, 5000)
+                    gender = random.choices(["N", "M", "T"], weights=[0.5, 0.48, 0.2])
+                    firstname, lastname = self.choose_name(gender)
+                    patient_name = f"{firstname} {lastname}"
+                    age = random.randint(1, 100)
+                    visit_date = START_DATE + timedelta(days=random.randint(0, 365))
+                    visit_type = random.choice(RandomData.VISIT_TYPES)
+                    (sym_1, sym_2) = self.choose_symptoms()
+                    medication = self.choose_medications()
+                    condition = self.choose_conditions()
+                    duration = self.choose_durations()
+                    vacc_keyword = self.choose_vacc_keyword()
+                    vacc_place = self.choose_vacc_place()
+                    vacc_type = self.choose_vacc_type()
+                    type = random.choices(["normal", "vacc"], weights=[0.8, 0.2])
+                    free_text = self.free_text_gen(sym_1, sym_2, medication, condition, duration, vacc_keyword, vacc_place, vacc_type, type)
 
-        condition_source, condition_acc = random.choice(CONDITIONS)
-        condition_concept_id = random.randint(1000000, 9999999)
-        drug_concept_id = random.randint(1000000, 9999999)
+                    writer.writerow([
+                    i,
+                    visit_id,
+                    person_id,
+                    gender[0],
+                    patient_name,
+                    age,
+                    visit_date.isoformat(),
+                    visit_type,
+                    sym_1,
+                    sym_2,
+                    medication,
+                    condition,
+                    duration,
+                    free_text
+                    ])
 
-        duration = random.choice(DURATIONS)
-        note = build_note(s1_form, s2_form, s3_form, med1, condition_acc, duration)
-
-        mapping_hint = (
-            "Map symptoms from note to condition/observation concepts; "
-            "handle negation and uncertainty during NLP; map medication mentions to drug_exposure; "
-            "preserve visit_type for visit_occurrence."
-        )
-
-        writer.writerow([
-            i,
-            person_id,
-            patient_name,
-            visit_date.isoformat(),
-            age,
-            sex,
-            visit_type,
-            visit_concept_id,
-            chief_complaint_fi,
-            note,
-            s1,
-            s2,
-            s3,
-            med1,
-            med2 if med2 else "",
-            condition_source,
-            condition_concept_id,
-            med1,
-            drug_concept_id,
-            mapping_hint
-        ])        
-        
-
+        except PermissionError as e:
+            return e, "error"        
 
 if __name__ == "__main__":
     Main().main()
