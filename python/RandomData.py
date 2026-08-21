@@ -21,29 +21,28 @@ class RandomData():
         "Eriksson", "Pandey", "Khan", "Hassan"
     ]
 
+    VISIT_TYPES = [
+        ("Perusterveydenhuollon vastaanotto", 9202),
+        ("Erikoissairaanhoidon poliklinikkakäynti", 9202),
+        ("Päivystyskäynti", 9203),
+        ("Sairaalan vuodeosastohoito", 9201),
+        ("Puhelinkonsultaatio", 44818519),
+        ("Uusintakäynti", 9202),
+        ("Kotiutusarvio", 9201),
+    ]
+
+
     VACCINATION_KEYWORD = [
-        ("rokotus"),
         ("rokotettu"),
-        ("rokotetaan"),
-        ("piikitys"),
-        ("piikitetty"),
-        ("piikitetään"),
-        ("sumutus"),
-        ("sumuttettu"),
-        ("sumutetaan"),
-        ("suihkutus"),
-        ("suihkutettu"),
-        ("suihkutetaan"),
-        ("tippa"),
-        ("tippana")
+        ("rokotetaan")
     ]
 
     VACCINATION_PLACE = [
-        ("ihoon", "ihonsisäisesti"),
-        ("lihakseen", "lihaksensisäisesti"),
-        ("nenään", "nenänsisäisesti"),
-        ("suuhun", "suun kautta"),
-        ("ihon alle"), ("ihon alaisesti")
+        ("ihoon"),
+        ("lihakseen"),
+        ("nenään"),
+        ("suuhun"),
+        ("ihon alle")
     ]
 
     VACCINATION_TYPE = [
@@ -53,26 +52,26 @@ class RandomData():
         ("pneumokokki"),
         ("influenssa"),
         ("korona"),
-        ("viitosrokote"),
+        ("viitos"),
         ("jäykkäkouristustehoste")
     ]
 
     SYMPTOM_BANK = [
-        ("päänsärky", "päänsärkyä"),
-        ("pahoinvointi", "pahoinvointia"),
-        ("huimaus", "huimausta"),
-        ("väsymys", "väsymystä"),
-        ("kuume", "kuumetta"),
-        ("yskä", "yskää"),
-        ("kurkkukipu", "kurkkukipua"),
-        ("hengenahdistus", "hengenahdistusta"),
-        ("ripuli", "ripulia"),
-        ("vatsakipu", "vatsakipua"),
-        ("selkäkipu", "selkäkipua"),
-        ("unettomuus", "unettomuutta"),
-        ("nilkkaturvotus", "nilkkaturvotusta"),
-        ("ihottuma", "ihottumaa"),
-        ("rintakipu", "rintakipua"),
+        ("päänsärky"),
+        ("pahoinvointi"),
+        ("huimaus"),
+        ("väsymys"),
+        ("kuume"),
+        ("yskä"),
+        ("kurkkukipu"),
+        ("hengenahdistus"),
+        ("ripuli"),
+        ("vatsakipu"),
+        ("selkäkipu"),
+        ("unettomuus"),
+        ("nilkkaturvotus"),
+        ("ihottuma"),
+        ("rintakipu")
     ]
 
     MEDICATIONS = [
@@ -87,37 +86,48 @@ class RandomData():
     ]
 
     CONDITIONS = [
-        ("ylähengitystieinfektioo", "ylähengitystieinfektion"),
-        ("niskajumii", "niskajumin"),
-        ("migreenii", "migreenin"),
-        ("gastroenteriittii", "gastroenteriitin"),
-        ("selkäkipuu", "selkäkivun"),
-        ("virtsatieinfektioo", "virtsatieinfektion"),
-        ("astman pahenemisvaiheesee", "astman pahenemisvaiheen"),
+        ("ylähengitystieinfektio"),
+        ("niskajumi"),
+        ("migreeni"),
+        ("gastroenteriitti"),
+        ("selkäkipu"),
+        ("virtsatieinfektio"),
+        ("astman pahenemisvaihe")
     ]
 
     TEMPLATES = [
-    "Potilas kertoo {sym1}sta ja {sym2}sta. Ei kuumetta. Kotihoitoon {med1} tarvittaessa.",
-    "Vastaanotolla {sym1} jatkunut {duration}. Potilas aloittanut itse {med1}.",
-    "Potilaalla esiintyy {sym1} ja yleistä {sym1}. Ei viitettä akuuttiin infektioon.",
-    "Päivystyksessä {sym1} pahentunut viime yön aikana. Annettu {med1} ja seurattu vointia.",
-    "Puhelimitse kuvaa {sym1} {duration}. Ohjattu seuraamaan oiretta ja käyttämään {med1}.",
+    "Potilas kertoo oireita: {sym1} ja {sym2}. Ei kuumetta. Kotihoitoon {med1}a tarvittaessa.",
+    "Vastaanotolla kertoo, että {sym1} jatkunut {duration}. Potilas on ottanut itse {med1}a.",
+    "Potilaalla esiintyy {sym1} ja yleinen {sym1}. Ei viitettä akuuttiin infektioon.",
+    "Päivystyksessä {sym1} pahentunut viime yön aikana. Annettu {med1}a ja seurattu vointia.",
+    "Puhelimitse kuvaa oireina: {sym1} ja {sym2}, jotka ovat jatkuneet {duration}. Ohjattu seuraamaan oiretta ja käyttämään {med1}a.",
     "Potilas saapuu kontrolliin. Aiempi {sym1} selvästi helpottanut, mutta {sym2} edelleen ajoittain.",
-    "Sairaalahoidon aikana todettu {sym1} ja {sym2}. Lääkitys tarkistettu, {med1} aloitettu.",
-    "Vapaa teksti: potilas ei raportoi {sym1}, mutta mainitsee {sym2}. Käyttää {med1} säännöllisesti.",
-    "Oirekuva sopii todennäköisesti {condition}n. Ei allergioita tiedossa. Kotiutuu tänään.",
+    "Sairaalahoidon aikana todettu {sym1} ja {sym2}. Lääkitys tarkistettu, {med1} aloitettu. Kotiutuu {duration} päästä",
+    "Vapaa teksti: {sym1} ei ole potilaan raportissa, mutta {sym2} on. Käyttää {med1}a säännöllisesti.",
+    "Oirekuva on todennäköisesti {condition}. Ei allergioita tiedossa. Kotiutuu tänään.",
 
     # Negation
-    "Potilas kieltää {sym1}n, mutta kertoo {sym2}sta. Ei kuumetta eikä yleistilan laskua.",
-    "Ei viitettä {sym1}n tai {sym2}n. Potilas ei käytä {med1} enää.",
-    "Kieltää rintakivun. Hengenahdistusta ei esiinny levossa. Parasetamoli on auttanut.",
-    "Ei pahoinvointia, ei oksentelua. {sym1} on kuitenkin jatkunut lievänä.",
-    "Potilas ei ole huomannut {sym1}n pahenemista. {med1} lopetettu sivuvaikutusten vuoksi.",
+    "Potilas kieltää, että {sym1} olisi oire, mutta kertoo, että {sym2} kestänyt {duration}. Ei kuumetta eikä yleistilan laskua.",
+    "Ei viitettä, että kyseessä olisi {sym1} tai {sym2}. Potilas ei käytä {med1}a enää.",
+    "Kieltää rintakivun. Hengenahdistusta ei esiinny levossa. Potilasta on auttanut {med1}.",
+    "Ei pahoinvointia, ei oksentelua. {sym1} on kuitenkin jatkunut lievänä {duration}.",
+    "Potilas ei ole huomannut, että {sym1} olisi pahentunut. Lopetettu {med1} sivuvaikutusten vuoksi.",
 
     # Uncertainty / speculation
-    "Mahdollinen {condition}n alkuvaihe. {sym1} saattaa liittyä rasitukseen.",
-    "Oirekuva viittaa ehkä {condition}n, mutta varmaa diagnoosia ei vielä ole.",
-    "Voisi sopia {condition}n; {sym1} on epäspesifi ja tilannetta seurataan.",
-    "Syy {sym1}n epäselvä, mahdollisesti lääkitykseen liittyvä. {med1} tauotettu toistaiseksi.",
-    "Epäily {condition}sta, koska {sym2} ja {sym1} ovat lieviä ja vaihtelevia.",
-]
+    "Mahdollinen {condition} alkuvaiheessa. {sym1} saattaa liittyä rasitukseen.",
+    "Oirekuva on ehkä {condition}, mutta varmaa diagnoosia ei vielä ole.",
+    "Voisi olla {condition}; {sym1} on epäspesifi ja tilannetta seurataan.",
+    "Syy oireeseen {sym1} epäselvä, mahdollisesti lääkitykseen liittyvä. Tauotettu {med1} toistaiseksi.",
+    "Epäilty {condition}, koska {sym2} ja {sym1} ovat lieviä ja vaihtelevia.",
+    ]
+
+    TEMPLATES_VACC = [
+    "Potilas {vacc_keyword} {vacc_place} rokotteena {vacc_type}-rokote. Ei allergista reaktiota.",
+    "Potilas pelkäsi rokotusta. Annettu {vacc_type}-rokote {vacc_place}.",
+    "Potilas saanut aikaisemmin allergisia oireita rokotteista. {vacc_keyword} {vacc_place} {vacc_type}-rokote. Lievää ihottumaa rokotuksen jälkeen.",
+    "Kieltäytyi rokotteesta {vacc_type}-rokote. Piti tutkimusnäyttöjä riittämättöminä."
+    "Annettu {vacc_type}-rokote nenäsuihkeena."
+    "Potilas {vacc_keyword} {vacc_place} sekä {vacc_type} että {vacc_type}-rokotteella."
+    "Potilaalle annettu pistos {vacc_type}-rokotetta lihakseen. Lihas kipeytyi pistoksen jälkeen."
+    "Suihkutettu {vacc_type}-rokote nenään."
+    ]
