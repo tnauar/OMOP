@@ -1,24 +1,54 @@
 import random
 import csv
+import argparse
 from datetime import date, timedelta
 from RandomData import RandomData
+from DataCollector import DataCollector
+from FileWriter import FileWriter
 
 class Main:
 
     def main(self):
 
-        self.write_file()
+        data_collector = DataCollector()
+        file_writer = FileWriter()
+        data = data_collector.collect_data("json")
+        file_writer.write(data, "json")
+        file_writer.write(data, "csv")
+        file_writer.write(data, "parquet")
+        file_writer.write(data, "xlsx")
+        args = self.arg_parse()
+        self.write_file(args)
+
+        
+    def arg_parse(self):
+        parser = argparse.ArgumentParser(description="Random data generator.")
+        parser.add_argument("--type", help="File type. Either csv, json, parquet or xlsx.")
+        args = parser.parse_args()
+
+        return args.type
+
+    """We will plant some error to the these three fields below."""
 
     def choose_symptoms(self):
         (sym1, sym2)= random.sample(RandomData.SYMPTOM_BANK, 2)
+        planted_error = random.choices(["no", "yes"], k=1, weights=[0.99, 0.01])[0]
+        if planted_error == "yes":
+            return ("Err", sym2)
         return (sym1, sym2)
 
     def choose_medications(self):
         med1 = random.choice(RandomData.MEDICATIONS)
+        planted_error = random.choices(["no", "yes"], k=1, weights=[0.99, 0.01])[0]
+        if planted_error == "yes":
+            return "null"
         return med1
 
     def choose_conditions(self):
         cond1 = random.choice(RandomData.CONDITIONS)
+        planted_error = random.choices(["no", "yes"], k=1, weights=[0.99, 0.01])[0]
+        if planted_error == "yes":
+            return " "
         return cond1
 
     def choose_durations(self):
@@ -52,6 +82,19 @@ class Main:
     def choose_vacc_type(self):
         return random.choice(RandomData.VACCINATION_TYPE)
 
+    """These are extra random fields that bring diversity to the data."""
+    def choose_nationality(self):
+        nationality = random.choices(RandomData.NATIONALITY, weights=[0.88, 0.05, 0.02, 0.02, 0.01, 0.01, 0.01], k=1)[0]
+        return nationality
+
+    def choose_healthcare_plan(self):
+        healthcare_plan = random.choices(RandomData.HEALTHCARE_PLAN, weights=[0.4, 0.15, 0.05, 0.4], k=1)[0]
+        return healthcare_plan
+
+    def choose_education(self):
+        education = random.choices(RandomData.EDUCATION, weights=[0.2, 0.2, 0.4, 0.15, 0.05], k=1)[0]
+        return education
+
     def free_text_gen(self, sym_1, sym_2, medication, condition, duration, vacc_keyword, vacc_place, vacc_type, type):
 
         if type[0] == "normal":
@@ -72,8 +115,12 @@ class Main:
         )
 
 
-    def write_file(self):
+    def write_file(self,args):
 
+
+        # Täällä siis tehtäisiin yksi iso dict, joka sitten tulostettaisiin tiedostoihin eri menetelmillä.
+        # Ei tehtäisiin yksi dict tietylle tietotyypille ja sen omilla sarakkeilla random järjestyksessä.
+        # Ei tehdä liian monimutkaista. Kirjoitan data dictiin ja saman kaikille.
         try:
             with open("omop_visit_exercise_fi.csv", "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
@@ -98,7 +145,7 @@ class Main:
                 visit_id = 20000 + random.randint(4000, 9000)
                 START_DATE = date(2025, 1, 1)
 
-                for i in range(1, 10):
+                for i in range(1, 500):
 
                     visit_id = visit_id + i
                     person_id = 10000 + random.randint(1, 5000)
