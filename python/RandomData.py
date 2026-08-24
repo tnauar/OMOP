@@ -31,6 +31,30 @@ class RandomData():
         ("Kotiutusarvio", 9201),
     ]
 
+    NATIONALITY = [
+        ("Suomi"),
+        ("Viro"),
+        ("Venäjä"),
+        ("Ruotsi"),
+        ("Irak"),
+        ("Somalia"),
+        ("Afganistan")
+    ]
+
+    HEALTHCARE_PLAN = [
+        ("työterveys"),
+        ("vakuutus"),
+        ("yths"),
+        ("julkinen")
+    ]
+
+    EDUCATION = [
+        ("ylempi korkeakoulututkinto"),
+        ("alempikorkeakoulututkinto"),
+        ("ammattitutkinto"),
+        ("opiskelijä"),
+        ("kouluttamaton")
+    ]
 
     VACCINATION_KEYWORD = [
         ("rokotettu"),
@@ -105,15 +129,11 @@ class RandomData():
     "Sairaalahoidon aikana todettu {sym1} ja {sym2}. Lääkitys tarkistettu, {med1} aloitettu. Kotiutuu {duration} päästä",
     "Vapaa teksti: {sym1} ei ole potilaan raportissa, mutta {sym2} on. Käyttää {med1}a säännöllisesti.",
     "Oirekuva on todennäköisesti {condition}. Ei allergioita tiedossa. Kotiutuu tänään.",
-
-    # Negation
     "Potilas kieltää, että {sym1} olisi oire, mutta kertoo, että {sym2} kestänyt {duration}. Ei kuumetta eikä yleistilan laskua.",
     "Ei viitettä, että kyseessä olisi {sym1} tai {sym2}. Potilas ei käytä {med1}a enää.",
     "Kieltää rintakivun. Hengenahdistusta ei esiinny levossa. Potilasta on auttanut {med1}.",
     "Ei pahoinvointia, ei oksentelua. {sym1} on kuitenkin jatkunut lievänä {duration}.",
     "Potilas ei ole huomannut, että {sym1} olisi pahentunut. Lopetettu {med1} sivuvaikutusten vuoksi.",
-
-    # Uncertainty / speculation
     "Mahdollinen {condition} alkuvaiheessa. {sym1} saattaa liittyä rasitukseen.",
     "Oirekuva on ehkä {condition}, mutta varmaa diagnoosia ei vielä ole.",
     "Voisi olla {condition}; {sym1} on epäspesifi ja tilannetta seurataan.",
