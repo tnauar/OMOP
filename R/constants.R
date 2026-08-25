@@ -115,40 +115,34 @@ CONDITIONS <- c(
 )
 
 TEMPLATES <- c(
-  "Potilas kertoo oireita: %s ja %s. Ei kuumetta. Kotihoitoon %sa tarvittaessa.",
-  "Vastaanotolla kertoo, että %s jatkunut %s. Potilas on ottanut itse %sa.",
-  "Potilaalla esiintyy %s ja yleinen %s. Ei viitettä akuuttiin infektioon.",
-  "Päivystyksessä %s pahentunut viime yön aikana. Annettu %sa ja seurattu vointia.",
-  "Puhelimitse kuvaa oireina: %s ja %s, jotka ovat jatkuneet %s. Ohjattu seuraamaan oiretta ja käyttämään %sa.",
-  "Potilas saapuu kontrolliin. Aiempi %s selvästi helpottanut, mutta %s edelleen ajoittain.",
-  "Sairaalahoidon aikana todettu %s ja %s. Lääkitys tarkistettu, %s aloitettu. Kotiutuu %s päästä",
-  "Vapaa teksti: %s ei ole potilaan raportissa, mutta %s on. Käyttää %sa säännöllisesti.",
-  "Oirekuva on todennäköisesti %s. Ei allergioita tiedossa. Kotiutuu tänään.",
-  "Potilas kieltää, että %s olisi oire, mutta kertoo, että %s kestänyt %s. Ei kuumetta eikä yleistilan laskua.",
-  "Ei viitettä, että kyseessä olisi %s tai %s. Potilas ei käytä %sa enää.",
-  "Kieltää rintakivun. Hengenahdistusta ei esiinny levossa. Potilasta on auttanut %s.",
-  "Ei pahoinvointia, ei oksentelua. %s on kuitenkin jatkunut lievänä %s.",
-  "Potilas ei ole huomannut, että %s olisi pahentunut. Lopetettu %sa sivuvaikutusten vuoksi.",
-  "Mahdollinen %s alkuvaiheessa. %s saattaa liittyä rasitukseen.",
-  "Oirekuva on ehkä %s, mutta varmaa diagnoosia ei vielä ole.",
-  "Voisi olla %s; %s on epäspesifi ja tilannetta seurataan.",
-  "Syy oireeseen %s epäselvä, mahdollisesti lääkitykseen liittyvä. Tauotettu %s toistaiseksi.",
-  "Epäilty %s, koska %s ja %s ovat lieviä ja vaihtelevia."
+  "Potilas kertoo oireita: %1$s ja %2$s. Ei kuumetta. Kotihoitoon %3$sa tarvittaessa.",
+  "Vastaanotolla kertoo, että %1$s jatkunut %4$s. Potilas on ottanut itse %3$sa.",
+  "Potilaalla esiintyy %1$s ja yleinen %2$s. Ei viitettä akuuttiin infektioon.",
+  "Päivystyksessä %1$s pahentunut viime yön aikana. Annettu %3$sa ja seurattu vointia.",
+  "Puhelimitse kuvaa oireina: %1$s ja %2$s, jotka ovat jatkuneet %4$s. Ohjattu seuraamaan oiretta ja käyttämään %3$sa.",
+  "Potilas saapuu kontrolliin. Aiempi %1$s selvästi helpottanut, mutta %2$s edelleen ajoittain.",
+  "Sairaalahoidon aikana todettu %1$s ja %2$s. Lääkitys tarkistettu, %3$s aloitettu. Kotiutuu %4$s päästä",
+  "Vapaa teksti: %1$s ei ole potilaan raportissa, mutta %2$s on. Käyttää %3$sa säännöllisesti.",
+  "Oirekuva on todennäköisesti %5$s. Ei allergioita tiedossa. Kotiutuu tänään.",
+  "Potilas kieltää, että %1$s olisi oire, mutta kertoo, että %2$s kestänyt %4$s. Ei kuumetta eikä yleistilan laskua.",
+  "Ei viitettä, että kyseessä olisi %1$s tai %2$s. Potilas ei käytä %3$sa enää.",
+  "Kieltää rintakivun. Hengenahdistusta ei esiinny levossa. Potilasta on auttanut %3$s.",
+  "Ei pahoinvointia, ei oksentelua. %1$s on kuitenkin jatkunut lievänä %4$s.",
+  "Potilas ei ole huomannut, että %1$s olisi pahentunut. Lopetettu %3$sa sivuvaikutusten vuoksi.",
+  "Mahdollinen %5$s alkuvaiheessa. %1$s saattaa liittyä rasitukseen.",
+  "Oirekuva on ehkä %5$s, mutta varmaa diagnoosia ei vielä ole.",
+  "Voisi olla %5$s; %1$s on epäspesifi ja tilannetta seurataan.",
+  "Syy oireeseen %1$s epäselvä, mahdollisesti lääkitykseen liittyvä. Tauotettu %3$s toistaiseksi.",
+  "Epäilty %5$s, koska %1$s ja %2$s ovat lieviä ja vaihtelevia."
 )
 
 TEMPLATES_VACC <- c(
-  "Potilas %s %s rokotteena %s-rokote. Ei allergista reaktiota.",
-  "Potilas pelkäsi rokotusta. Annettu %s-rokote %s.",
-  "Potilas saanut aikaisemmin allergisia oireita rokotteista. %s %s %s-rokote. Lievää ihottumaa rokotuksen jälkeen.",
-  "Kieltäytyi rokotteesta %s-rokote. Piti tutkimusnäyttöjä riittämättöminä.",
-  "Annettu %s-rokote nenäsuihkeena.",
-  "Potilas %s %s sekä %s että %s-rokotteella.",
-  "Potilaalle annettu pistos %s-rokotetta lihakseen. Lihas kipeytyi pistoksen jälkeen.",
-  "Suihkutettu %s-rokote nenään."
+  "Potilas %1$s %2$s rokotteena %3$s-rokote. Ei allergista reaktiota.",
+  "Potilas pelkäsi rokotusta. Annettu %3$s-rokote %2$s.",
+  "Potilas saanut aikaisemmin allergisia oireita rokotteista. %1$s %2$s %3$s-rokote. Lievää ihottumaa rokotuksen jälkeen.",
+  "Kieltäytyi rokotteesta %3$s-rokote. Piti tutkimusnäyttöjä riittämättöminä.",
+  "Annettu %3$s-rokote nenäsuihkeena.",
+  "Potilas %1$s %2$s %3$s-rokotteella.",
+  "Potilaalle annettu pistos %3$s-rokotetta lihakseen. Lihas kipeytyi pistoksen jälkeen.",
+  "Suihkutettu %3$s-rokote nenään."
 )
-
-
-
-
-
-
