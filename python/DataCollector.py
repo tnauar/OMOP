@@ -1,47 +1,82 @@
 import random
-import csv
-import pandas
 from datetime import date, timedelta
 from RandomData import RandomData
-from FileWriter import FileWriter
 
 class DataCollector():
 
     def __init__(self):
-        file_writer = FileWriter()
+        self.START_DATE = date(2025, 1, 1)
 
-    """We will plant some error to the these three fields below."""
-
-    def choose_symptoms(self):
+    def choose_symptoms(self) -> tuple[str, str]:
+        """Generates two random symptoms from the symptom bank.
+        There is a one percent chance that an error is planted to the data to
+        make it more realistic and that there is something to find in the data validation
+        process when this data is taken to the database.
+        
+        Args:
+            None.
+            
+        Returns: A tuple with two strings that contain two random symptoms and sometimes an Err code.
+        """
         (sym1, sym2)= random.sample(RandomData.SYMPTOM_BANK, 2)
         planted_error = random.choices(["no", "yes"], k=1, weights=[0.99, 0.01])[0]
         if planted_error == "yes":
             return ("Err", sym2)
         return (sym1, sym2)
 
-    def choose_medications(self):
+    def choose_medications(self) -> str:
+        """Generates a random medication from the medications.
+        There is a one percent chance that null is planted to the data to
+        make it more realistic and that there is something to find in the data validation
+        process when this data is taken to the database.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains medication and sometimes a null code.
+        """
         med1 = random.choice(RandomData.MEDICATIONS)
         planted_error = random.choices(["no", "yes"], k=1, weights=[0.99, 0.01])[0]
         if planted_error == "yes":
             return "null"
         return med1
 
-    def choose_conditions(self):
+    def choose_conditions(self) -> str:
+        """Generates a random condition from the conditions.
+        There is a one percent chance that " " is planted to the data to
+        make it more realistic and that there is something to find in the data validation
+        process when this data is taken to the database.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains a condition and sometimes " " character.
+        """
         cond1 = random.choice(RandomData.CONDITIONS)
         planted_error = random.choices(["no", "yes"], k=1, weights=[0.99, 0.01])[0]
         if planted_error == "yes":
             return " "
         return cond1
 
-    def choose_durations(self):
+    def choose_durations(self) -> str:
+        """Generates a random duration from the durations.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains duration.
+        """
         dur1 = random.choice(RandomData.DURATIONS)
         return dur1
 
-    def choose_templates(self):
-        temp1 = random.choice(RandomData.TEMPLATES)
-        return temp1
-
-    def choose_name(self, gender):
+    def choose_name(self, gender: str) -> tuple[str, str]:
+        """Generates a random first name last name pair based on the gender using the names.
+        
+        Args:
+            Gender. Either M=mies, N=nainen or T=trans tai muunsukupuolinen.
+            
+        Returns: A tuple of strings that contain first name and last name.
+        """
 
         if gender[0] == "T":
             gender = random.choice(["M", "N"]) 
@@ -55,29 +90,114 @@ class DataCollector():
             lastname = random.choice(RandomData.LAST_NAMES)
             return firstname, lastname
 
-    def choose_vacc_keyword(self):
+    def choose_vacc_keyword(self) -> str:
+        """Generates a random vaccination keyword from the vaccination keyword.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains vaccination keyword.
+        """
         return random.choice(RandomData.VACCINATION_KEYWORD)
 
-    def choose_vacc_place(self):
+    def choose_vacc_place(self) -> str:
+        """Generates a random vaccination place from the vaccination place.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains vaccination place.
+        """
         return random.choice(RandomData.VACCINATION_PLACE)
 
-    def choose_vacc_type(self):
+    def choose_vacc_type(self) -> str:
+        """Generates a random vaccination type from the vaccination type.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains vaccination type.
+        """
         return random.choice(RandomData.VACCINATION_TYPE)
 
-    """These are extra random fields that bring diversity to the data."""
-    def choose_nationality(self):
+    def choose_nationality(self)-> str:
+        """Generates a random nationality from the nationality.
+        There are different weights for different nationalities.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains nationality.
+        """
         nationality = random.choices(RandomData.NATIONALITY, weights=[0.88, 0.05, 0.02, 0.02, 0.01, 0.01, 0.01], k=1)[0]
         return nationality
 
-    def choose_healthcare_plan(self):
+    def choose_healthcare_plan(self)-> str:
+        """Generates a random health care plan from the health care plan.
+        There are different weights for different plans.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains a health care plan.
+        """
         healthcare_plan = random.choices(RandomData.HEALTHCARE_PLAN, weights=[0.4, 0.15, 0.05, 0.4], k=1)[0]
         return healthcare_plan
 
-    def choose_education(self):
+    def choose_education(self)-> str:
+        """Generates a random education from the education.
+        There are different weights for different educations.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains an education.
+        """
         education = random.choices(RandomData.EDUCATION, weights=[0.2, 0.2, 0.4, 0.15, 0.05], k=1)[0]
         return education
 
-    def free_text_gen(self, sym_1, sym_2, medication, condition, duration, vacc_keyword, vacc_place, vacc_type, type):
+    def choose_gender(self)-> str:
+        """Generates a random gender from the options M=mies, N=nainen, T=trans tai muunsukupuolinen.
+        There are different weights for different gender.
+        
+        Args:
+            None.
+            
+        Returns: A string that contains gender presented by M,N or T.
+        """
+        gender = random.choices(["N", "M", "T"], weights=[0.5, 0.48, 0.2])
+        return gender
+
+    def choose_visit_type(self)-> tuple[str,int]:
+        """Generates a random visit_type tuple from visit type.
+        The string is the name of the visit type and the integer is the id of the visit type.
+        
+        Args:
+            None.
+            
+        Returns: A tuple that contains string visit_type and integer visit_id.
+        """
+        visit_type = random.choice(RandomData.VISIT_TYPES)
+        return visit_type
+
+    def free_text_gen(self, sym_1: str, sym_2: str, medication: str, condition: str, duration: str, vacc_keyword: str, vacc_place: str, 
+                      vacc_type: str, type: str)-> str:
+        """Generates a free text field using templates and the arguments given to it.
+        There are two types of templates. One for vaccination and the other for general cases.
+        
+        Args:
+            sym_1: A string describing a symptom.
+            sym_2: A string describing a another symptom.
+            medication: A string describing the patients medication.
+            condition: A string describing the patients condition.
+            duration: A string describing duration of things(symptom/condition/medication).
+            vacc_keyword: A string describing a word for vaccination. This is needed in the mining exercise.
+            vacc_place: A string describing the place of the vaccination. This is needed in the mining exercise.
+            vacc_type: A string describing the type of the vaccination. This is needed in the mining exercise.
+            type: A string describing which template to use. The options are normal and vacc.
+            
+        Returns: A string that contains a template filled with given describing arguments.
+        """
 
         if type[0] == "normal":
             template = random.choice(RandomData.TEMPLATES)
@@ -97,19 +217,19 @@ class DataCollector():
         )
 
 
-    def collect_data(self, filetype):
-
-        # Täällä siis tehtäisiin yksi iso dict, joka sitten tulostettaisiin tiedostoihin eri menetelmillä.
-        # Ei tehtäisiin yksi dict tietylle tietotyypille ja sen omilla sarakkeilla random järjestyksessä.
-        # Ei tehdä liian monimutkaista. Kirjoitan data dictiin ja saman kaikille.
-        # Tässä se ero pitäisi tehdä tehdään if rakenteeseen useampi dictin muodostus sen mukaan
-        # mikä tiedostotyyppi on kyseessä. Sillä tavalla ainakin saisi niihin eroa, mutta silloin tulisi
-        # jonkin verran koodin toistoa.
-
-
+    def collect_data(self, filetype: str) -> list[dict]:
+        """Creates 500 dicts from the random values and collects them to a list. 
+        Each data file type has different random values and
+        different amount of columns and the columns are in a different order.
+        The main point is that the data files content is different so that we can use SQL to set them in a same format.
+        
+        Args:
+            filetype: A string that defines the schema of the file. Different values are csv, json, parquet, xlsx.
+            
+        Returns: A list containing dicts that each contain one row of random data.
+        """
 
         visit_index = 20000 + random.randint(4000, 9000)
-        START_DATE = date(2025, 1, 1)
 
         rows = []
 
@@ -117,12 +237,12 @@ class DataCollector():
 
             visit_index = visit_index + i
             person_id = 10000 + random.randint(1, 5000)
-            gender = random.choices(["N", "M", "T"], weights=[0.5, 0.48, 0.2])
+            gender = self.choose_gender()
             firstname, lastname = self.choose_name(gender)
             patient_name = f"{firstname} {lastname}"
             age = random.randint(1, 100)
-            visit_date = START_DATE + timedelta(days=random.randint(0, 365))
-            visit_type, visit_id = random.choice(RandomData.VISIT_TYPES)
+            visit_date = self.START_DATE + timedelta(days=random.randint(0, 365))
+            visit_type, visit_id = self.choose_visit_type()
             (sym_1, sym_2) = self.choose_symptoms()
             medication = self.choose_medications()
             condition = self.choose_conditions()
