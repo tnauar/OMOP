@@ -1,7 +1,8 @@
 
 class RandomData():
 
-    """This class contains the data from which the random data is generated."""
+    """This class contains the data from which the random data is generated.
+    """
 
     FIRST_NAMES_MALE = [
         "Matti", "Pekka", "Kai", "Antti", "Seppo", "Juha", "Mikko", "Lari",
@@ -119,6 +120,9 @@ class RandomData():
         ("astman pahenemisvaihe")
     ]
 
+    """From these templates the free text fields are generated.
+    """
+
     TEMPLATES = [
     "Potilas kertoo oireita: {sym1} ja {sym2}. Ei kuumetta. Kotihoitoon {med1}a tarvittaessa.",
     "Vastaanotolla kertoo, että {sym1} jatkunut {duration}. Potilas on ottanut itse {med1}a.",
@@ -147,7 +151,7 @@ class RandomData():
     "Potilas saanut aikaisemmin allergisia oireita rokotteista. {vacc_keyword} {vacc_place} {vacc_type}-rokote. Lievää ihottumaa rokotuksen jälkeen.",
     "Kieltäytyi rokotteesta {vacc_type}-rokote. Piti tutkimusnäyttöjä riittämättöminä."
     "Annettu {vacc_type}-rokote nenäsuihkeena."
-    "Potilas {vacc_keyword} {vacc_place} sekä {vacc_type} että {vacc_type}-rokotteella."
+    "Potilas {vacc_keyword} {vacc_place} {vacc_type}-rokotteella."
     "Potilaalle annettu pistos {vacc_type}-rokotetta lihakseen. Lihas kipeytyi pistoksen jälkeen."
     "Suihkutettu {vacc_type}-rokote nenään."
     ]
