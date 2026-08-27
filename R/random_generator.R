@@ -1,10 +1,13 @@
 # This program will write a 500 row rds data file that contains random
-# imaginary health care data.
+# imaginary health care data. It will also write the same as a csv file
+# because csv file is easy to import to the database for further steps.
 
 # This sources contains the constants from which the data is created.
 source("./constants.R")
 
 # Definition of functions start here.
+# Two functions. One for generating free text note for common cases
+# and for generating free text note for vaccination cases.
 generate_note <- function(
                           symptoms,
                           condition,
@@ -36,8 +39,8 @@ generate_note_vacc <- function(
                   )
 }
 # Main program starts here.
-# We will loop 500 times and for each round we will generate the random
-# data and write it to memory.
+# We will loop 500 times and for each round we will generate a random
+# data containing one healthcare visit and write it to memory to a data frame.
 random_data_results <- data.frame(
   gender = character(),
   firstname = character(),
@@ -57,12 +60,13 @@ random_data_results <- data.frame(
   visit_id = numeric(),
   visit_type = character(),
   visit_date = as.Date(character())
-  
-  
 )
 
 for (i in 1:500) {
   
+  # On each round random value is chosen for each variable.
+  # In some cases there might be probability weights in order
+  # to make the data a bit more realistic.
   gender <- sample(
     c("M","N","T"),
     1,
@@ -162,7 +166,7 @@ for (i in 1:500) {
   )
   
   # Vaccinations are separated from other templates.
-  # They not as common.
+  # They are not as common.
   vaccination = sample(
     c("True", "False"),
     1,
@@ -230,6 +234,9 @@ for (i in 1:500) {
 }
 
 # Finally we will write the data from the memory to an RDS file.
+# Also it will be written to a csv file because there is no need
+# to do a separate conversion program and csv data is easy to import
+# to the database.
 
 saveRDS(random_data_results, "results.rds")
 csv_data <- readRDS("results.rds")
