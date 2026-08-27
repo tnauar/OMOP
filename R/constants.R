@@ -1,3 +1,5 @@
+# This file contains the constant data from which the random parameters are chosen.
+
 FIRST_NAMES_MALE <- c(
   "Matti", "Pekka", "Kai", "Antti", "Seppo", "Juha", "Mikko", "Lari",
   "Timo", "Jari", "Emil", "Petri", "Hannu", "Aleksi", "Teppo", "Markku",
