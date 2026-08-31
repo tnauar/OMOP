@@ -1,0 +1,8 @@
+CodeId,Abbreviation,ShortName,LongName,BeginningDate,ExpiringDate,LastModified,LastModifier,Status,Description,OID,ALONG:B,A:Långt_namn
+ID,ID,Ihoon,Ihonsisäinen,01.01.2007,31.12.2030,03.11.2015,"Lehtonen, L",1,rokotus on...,1.2.246.53,vaccination,kutant
+IM,IM,Lihakseen,Lihaksensisäinen,01.01.2007,31.12.2030,03.11.2015,"Lehtonen, L",1,rokotus on...,1.2.246.53,vaccination,intramuskulärt
+IN,IN,Nenään,Nenänsisäinen,03.11.2015,31.12.2030,03.11.2015,"Lehtonen, L",1,rokotus on...,,vaccination,Intranasal
+MUU,MUU,Muu antotapa,Muu antotapa,01.01.2007,31.12.2030,03.11.2015,"Lehtonen, L",1,rokotus on...,1.2.246.53,vaccination,annat admistreringssätt
+PO,PO,Suuhun,Suun kautta,01.01.2007,31.12.2030,03.11.2015,"Lehtonen, L",1,rokotus on...,1.2.246.53,vaccination,peroralt
+SC,SC,Ihon alle,Ihonalaisesti,01.01.2007,31.12.2030,03.11.2015,"Lehtonen, L",1,rokotus on...,1.2.246.53,vaccination,subkutant
+,,,,,,,,,, ,,
